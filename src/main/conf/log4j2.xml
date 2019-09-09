@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30" strict="true">
+ <Appenders>
+ 	<RollingRandomAccessFile name="CATALINA" fileName="logs/catalina.log"
+ 	filePattern="logs/$${date:yyyy_MM_dd}/catalina%d{yyyy-MM-dd-HH-mm}_%i.log.gz" append="true">
+ 		<PatternLayout>
+ 		 <Pattern>%d{YYYY-MM-dd HH:mm:ss} - %m%n</Pattern>
+ 		</PatternLayout>
+ 		<Policies>
+       		  <TimeBasedTriggeringPolicy interval="1" modulate="true" />																	<SizeBasedTriggeringPolicy size="1024 MB" />
+ 		</Policies>
+ 		<DefaultRolloverStrategy min="1" max="50" />
+ 	</RollingRandomAccessFile>
+ 	<RollingRandomAccessFile name="LOCALHOST" fileName="logs/localhost.log"
+ 	        filePattern="logs/$${date:yyyy_MM_dd}/localhost%d{yyyy-MM-dd-HH-mm}_%i.log.gz" append="true">
+ 	       <PatternLayout>
+ 	           <Pattern>%d{YYYY-MM-dd HH:mm:ss} %-5p %C{2} (%F:%L) - %m%n</Pattern>
+ 	           </PatternLayout>
+ 	           <Policies>
+ 	             <TimeBasedTriggeringPolicy interval="1" modulate="true" />                                                                                                                                    <SizeBasedTriggeringPolicy size="1024 MB" />
+ 	           </Policies>
+ 	         <DefaultRolloverStrategy min="1" max="50" />
+        </RollingRandomAccessFile>
+ </Appenders>
+ <Loggers>
+   <AsyncLogger name="applogs" level="all">
+     <AppenderRef ref="CATALINA"/>
+   </AsyncLogger>
+   <AsyncLogger name="locallogs" level="all">
+     <AppenderRef ref="LOCALHOST"/>
+   </AsyncLogger>
+   <Root level="INFO">
+     <AppenderRef ref="CATALINA"/>
+     <!--AppenderRef ref="LOCALHOST"/-->
+   </Root>
+ </Loggers>
+</Configuration>

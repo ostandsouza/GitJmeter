@@ -1,0 +1,55 @@
+image: maven
+#Setup settings.xml to point to BAMS Server, so that any uploads will happen to the appropriate links.
+
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  JMETER_VERSION: "4.0"
+  REST_VERSION: "1.64.9.0"
+  TOMCAT_VERSION: "8.5.42"
+  
+cache:
+  paths:
+  - .m2/repository/
+  - target/
+
+stages:
+  - test
+
+job_test:
+  stage: test
+  tags:
+    - master
+  script:
+    - export DD_SERVICESC="dd_services_reqc"
+    - export DD_SERVICES_REQC="dd_services_reqc"
+    - export DD_SERVICES_ORDC="dd_services_ordc"
+    - export DD_TPLANT_DEPTHC="dd_tplantc"
+    - export DD_TPLANT_TLC="dd_tplant_tlc"
+    - export MML_DMN_SRVR_ADDR="10.231.192.150:65000"
+    - export MML_LOC_BROK_ADDR="10.231.192.150:64101"
+    - export MML_DOMAIN_NAME="test_env"
+    - export MML_LIC_SRVR_ADDR="10.231.192.150:56000"
+    - export MML_LOGGER_ADDR="127.0.0.1:45454"
+    - export MIDDLEWARE_TYPE="0"
+    - export JFROG_CLI_OFFER_CONFIG="false"
+    - jfrog rt dl --url=https://bams-aws.refinitiv.com/artifactory/ --apikey=AKCp5dKPh5SowcXEBHcuntmUApSamFC3s71fou9f1KuxGhbndQ8s4RwweorMeQcFiut1v3d5u default.generic.global/nestweb/nestjavaweb/nestwebrest/nest_web_rest_$REST_VERSION.zip
+    - unzip nestweb/nestjavaweb/nestwebrest/nest_web_rest_$REST_VERSION.zip
+    - rm -rf nestweb
+    - wget http://www.trieuvan.com/apache/tomcat/tomcat-8/v8.5.42/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+    - tar -xzf apache-tomcat-$TOMCAT_VERSION.tar.gz
+    - rm apache-tomcat-$TOMCAT_VERSION.tar.gz
+    - myvar="$PWD"
+    - cp $myvar/src/main/conf/NESTresources.properties $myvar/src/main/conf/constants.properties $myvar/src/main/conf/restprelogin.properties $myvar/src/main/conf/sleep.properties $myvar/src/main/conf/yesproperties.properties $myvar/apache-tomcat-$TOMCAT_VERSION/lib/
+    - cp $myvar/src/main/conf/log4j2.xml $myvar/apache-tomcat-$TOMCAT_VERSION/lib/
+    - cp $myvar/src/main/conf/server.xml $myvar/apache-tomcat-$TOMCAT_VERSION/conf/
+    - rm -rf apache-tomcat-$TOMCAT_VERSION/webapps/docs apache-tomcat-$TOMCAT_VERSION/webapps/examples apache-tomcat-$TOMCAT_VERSION/webapps/host-manager apache-tomcat-$TOMCAT_VERSION/webapps/manager apache-tomcat-$TOMCAT_VERSION/webapps/ROOT
+    - cp $myvar/omne/NestHtml5Mobile.war $myvar/apache-tomcat-$TOMCAT_VERSION/webapps/
+    - ./apache-tomcat-$TOMCAT_VERSION/bin/startup.sh
+    - wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_VERSION.tgz
+    - tar -xzf apache-jmeter-$JMETER_VERSION.tgz
+    - rm apache-jmeter-$JMETER_VERSION.tgz
+    - export JMETER_HOME="$myvar/apache-jmeter-$JMETER_VERSION/"
+    - printenv |grep JMETER_HOME
+    - cp $myvar/src/main/conf/protrade.jmx $myvar/apache-jmeter-$JMETER_VERSION/bin/
+    - mvn compile exec:java

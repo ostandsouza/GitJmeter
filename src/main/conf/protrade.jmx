@@ -1,0 +1,2362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="serverIP" elementType="Argument">
+            <stringProp name="Argument.name">serverIP</stringProp>
+            <stringProp name="Argument.value">10.231.192.150</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="protocol" elementType="Argument">
+            <stringProp name="Argument.name">protocol</stringProp>
+            <stringProp name="Argument.value">http</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="Context" elementType="Argument">
+            <stringProp name="Argument.name">Context</stringProp>
+            <stringProp name="Argument.value">/REST3</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="port" elementType="Argument">
+            <stringProp name="Argument.name">port</stringProp>
+            <stringProp name="Argument.value">80</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="threads" elementType="Argument">
+            <stringProp name="Argument.name">threads</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="rampup" elementType="Argument">
+            <stringProp name="Argument.name">rampup</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="duration" elementType="Argument">
+            <stringProp name="Argument.name">duration</stringProp>
+            <stringProp name="Argument.value">360000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Users Data Set Config" enabled="true">
+        <stringProp name="filename">src/main/conf/Sample.csv</stringProp>
+        <stringProp name="fileEncoding">UTF-8</stringProp>
+        <stringProp name="variableNames">uid,password,answer1,answer2</stringProp>
+        <boolProp name="ignoreFirstLine">false</boolProp>
+        <stringProp name="delimiter">,</stringProp>
+        <boolProp name="quotedData">false</boolProp>
+        <boolProp name="recycle">true</boolProp>
+        <boolProp name="stopThread">false</boolProp>
+        <stringProp name="shareMode">shareMode.group</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="appContext" elementType="Argument">
+              <stringProp name="Argument.name">appContext</stringProp>
+              <stringProp name="Argument.value">${Context}/rest</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="wsContext" elementType="Argument">
+              <stringProp name="Argument.name">wsContext</stringProp>
+              <stringProp name="Argument.value">${Context}/socket/stream</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="LOGIN" elementType="Argument">
+              <stringProp name="Argument.name">LOGIN</stringProp>
+              <stringProp name="Argument.value">NOTLOGGEDIN</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${serverIP}</stringProp>
+          <stringProp name="HTTPSampler.port">${port}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_UnblockFlag" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/UnblockFlag</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_GetInitialKey" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/GetInitialKey</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Initial Public Key" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">publicKey</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.publicKey</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">publicKeyNotFound</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+            <stringProp name="JSON_PATH">$.stat</stringProp>
+            <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+            <boolProp name="JSONVALIDATION">false</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_GetPreAuthenticationKey" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${postdata}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/GetPreAuthenticationKey</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Encrypt Data To be Sent" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+
+String serverPublicKey = new String(Base64.decodeBase64(vars.get(&quot;publicKey&quot;)));
+
+CryptoRSA crypt = new CryptoRSA();
+NestKeyPair keyPair = crypt.generateNestKeyPair(512);
+
+String clientPublicKey = keyPair.getPemPublicKey();
+String clientPrivateKey = keyPair.getPemPrivateKey();
+
+vars.put(&quot;clientPublicKey&quot;,clientPublicKey);
+vars.put(&quot;clientPrivateKey&quot;,clientPrivateKey);
+
+PublicKey pubKey = crypt.getPublicKeyFromPemData(serverPublicKey);
+String encryptedClientPublicKey = crypt.encrypt(clientPublicKey,pubKey,512);
+
+MessageDigest md = MessageDigest.getInstance(&quot;SHA-256&quot;);
+byte[] digest = md.digest(serverPublicKey.getBytes());
+String hex = Hex.toHexString(digest);
+
+String jData = &quot;jData=&quot;+URLEncoder.encode(encryptedClientPublicKey,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;postdata&quot;,jData);
+</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract Public Key3" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">pubKey3</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.publicKey3</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">Public Key 3 not found</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+            <stringProp name="JSON_PATH">$.stat</stringProp>
+            <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+            <boolProp name="JSONVALIDATION">false</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Login 2FA" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${data}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/Login2FA</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String privateKey = vars.get(&quot;clientPrivateKey&quot;);
+NestKeyPair keyPair = crypt.generateNestKeyPair(privateKey);
+String pubKey3 = crypt.decrypt(vars.get(&quot;pubKey3&quot;),keyPair.getPrivateKey());
+
+vars.put(&quot;serverPublicKey3&quot;,pubKey3);
+
+MessageDigest md = MessageDigest.getInstance(&quot;SHA-256&quot;);
+byte[] digest = md.digest(pubKey3.getBytes());
+String hex = Hex.toHexString(digest);
+
+vars.put(&quot;pubKey3Hash&quot;,hex);
+
+String sendJsonObject = &quot;{\&quot;uid\&quot;:\&quot;&quot;+vars.get(&quot;uid&quot;)+&quot;\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey3);
+String encryptedSendObject = crypt.encrypt(sendJsonObject,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+            <stringProp name="JSON_PATH">$.stat</stringProp>
+            <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+            <boolProp name="JSONVALIDATION">false</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_ValidPwd" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${data}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/ValidPwd</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String uid = vars.get(&quot;uid&quot;);
+String password = vars.get(&quot;password&quot;);
+
+MessageDigest md = MessageDigest.getInstance(&quot;SHA-256&quot;);
+byte[] digest = md.digest(password.getBytes());
+
+for(int i=1;i&lt;=999;i++){
+	digest = md.digest(digest);
+}
+
+String passwordHash = Hex.toHexString(digest);
+
+String jsonObject = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;pwd\&quot;:\&quot;&quot;+passwordHash+&quot;\&quot;,\&quot;Imei\&quot;:\&quot;123456789\&quot;,\&quot;apk\&quot;:\&quot;0.0.0.0\&quot;,\&quot;ftl\&quot;:\&quot;N\&quot;,\&quot;Source\&quot;:\&quot;MOB\&quot;}&quot;;
+
+String hex = vars.get(&quot;pubKey3Hash&quot;);
+String pubKey3 = vars.get(&quot;serverPublicKey3&quot;);
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey3);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="scount extractor" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">scount</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.scount</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">scount not found</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="sIndex Extractor" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">sIndex</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.sIndex</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">Index Not Found</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+            <stringProp name="JSON_PATH">$.stat</stringProp>
+            <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+            <boolProp name="JSONVALIDATION">false</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_ValidAns" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${data}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/ValidAns</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String uid = vars.get(&quot;uid&quot;);
+String scount = vars.get(&quot;scount&quot;);
+String sIndex = vars.get(&quot;sIndex&quot;).replaceAll(&quot;\\|&quot;,&quot;-&quot;);
+String answer1 = vars.get(&quot;answer1&quot;);
+String answer2 = vars.get(&quot;answer2&quot;);
+
+String jsonObject = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;Count\&quot;:\&quot;&quot;+scount+&quot;\&quot;,\&quot;as\&quot;:\&quot;&quot;+answer1+&quot;-&quot;+answer2+&quot;\&quot;,\&quot;is\&quot;:\&quot;&quot;+sIndex+&quot;\&quot;}&quot;;
+
+String hex = vars.get(&quot;pubKey3Hash&quot;);
+String pubKey3 = vars.get(&quot;serverPublicKey3&quot;);
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey3);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract final Public Key" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">jEncResp</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.jEncResp</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">Enc Response Not found</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_DefaultLogin" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${data}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/DefaultLogin</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONValue;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String privateKey = vars.get(&quot;clientPrivateKey&quot;);
+NestKeyPair keyPair = crypt.generateNestKeyPair(privateKey);
+String decryptResponse = crypt.decrypt(vars.get(&quot;jEncResp&quot;),keyPair.getPrivateKey());
+JSONObject jObj = (JSONObject)JSONValue.parse(decryptResponse);
+
+String pubKey4 = jObj.get(&quot;sUserToken&quot;);
+String sUserSessionId = jObj.get(&quot;UserSessionID&quot;);
+
+vars.put(&quot;usersessionid&quot;,sUserSessionId);
+vars.put(&quot;serverPublicKey4&quot;,pubKey4);
+
+MessageDigest md = MessageDigest.getInstance(&quot;SHA-256&quot;);
+byte[] digest = md.digest(pubKey4.getBytes());
+String hex = Hex.toHexString(digest);
+
+vars.put(&quot;pubKey4Hash&quot;,hex);
+vars.put(&quot;LOGIN&quot;,&quot;LOGGEDIN&quot;)
+String uid = vars.get(&quot;uid&quot;);
+String jsonObject = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;imei\&quot;:\&quot;123456789\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">brkname</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.brkname</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">brkname not found</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(&quot;${LOGIN}&quot;==&quot;LOGGEDIN&quot;)}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+          <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+            <boolProp name="LoopController.continue_forever">true</boolProp>
+            <stringProp name="LoopController.loops">1</stringProp>
+          </LoopController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_gcmkey" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${data}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${appContext}/user/gcmkey/publish</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+                <stringProp name="ConstantTimer.delay">1000</stringProp>
+              </ConstantTimer>
+              <hashTree/>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Encrypt Data To be Sent" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String jsonObject = &quot;{\&quot;user\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;Imei\&quot;:\&quot;123456789\&quot;,\&quot;device\&quot;:\&quot;Nexus\&quot;,\&quot;registrationId\&quot;:\&quot;abcdefg123\&quot;}&quot;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_GetCOPriceFlag" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value"></stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${appContext}/GetCOPriceFlag</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Encrypt Data To be Sent" enabled="false">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String jsonObject = &quot;{\&quot;user\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;Imei\&quot;:\&quot;123456789\&quot;,\&quot;device\&quot;:\&quot;Nexus\&quot;,\&quot;registrationId\&quot;:\&quot;abcdefg123\&quot;}&quot;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,2048);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Predef" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${data}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${appContext}/broker/mw/scrips</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String brkname = vars.get(&quot;brkname&quot;)
+
+String placeOrder = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;scripList\&quot;:\&quot;nse_fo|22\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_researchCall" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${data}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${appContext}/researchCall</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+
+String placeOrder = &quot;{\&quot;uid\&quot;: \&quot;&quot;+uid+&quot;\&quot;,\&quot;messageId\&quot;:\&quot;trading calls\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_OrderBook" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${data}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${appContext}/OrderBook</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+
+String placeOrder = &quot;{\&quot;uid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;s_prdt_ali\&quot;: \&quot;BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Holding" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${data}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${appContext}/Holding</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String brkname = vars.get(&quot;brkname&quot;)
+
+String placeOrder = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;acctid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;brkname\&quot;:\&quot;&quot;+brkname+&quot;\&quot;,\&quot;s_prdt_ali\&quot;:\&quot;BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\&quot;,\&quot;Pcode\&quot;:\&quot;\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Positions" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${data}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${appContext}/PositionBook</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+
+String placeOrder = &quot;{\&quot;uid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;actid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;s_prdt_ali\&quot;: \&quot;BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\&quot;, \&quot;type\&quot;: \&quot;NET\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Limits" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">${data}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${appContext}/Limits</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+                <stringProp name="scriptLanguage">groovy</stringProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="cacheKey">true</stringProp>
+                <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+
+String placeOrder = &quot;{\&quot;uid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;actid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;segment\&quot;:\&quot;ALL\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+              </JSR223PreProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">500</stringProp>
+        <stringProp name="ThreadGroup.delay">15</stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="appContext" elementType="Argument">
+              <stringProp name="Argument.name">appContext</stringProp>
+              <stringProp name="Argument.value">${Context}/rest</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="wsContext" elementType="Argument">
+              <stringProp name="Argument.name">wsContext</stringProp>
+              <stringProp name="Argument.value">${Context}/socket/stream</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="LOGIN" elementType="Argument">
+              <stringProp name="Argument.name">LOGIN</stringProp>
+              <stringProp name="Argument.value">NOTLOGGEDIN</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${serverIP}</stringProp>
+          <stringProp name="HTTPSampler.port">${port}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${protocol}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_SessionID" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/ValidateToken?LoginID=${uid}</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">sResp</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.sResp</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">sResp not found</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Decode Token" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import org.json.JSONObject;
+
+String sessionid = new String(Base64.decodeBase64(vars.get(&quot;sResp&quot;)));
+JSONObject sessionKey = new JSONObject(sessionid);
+
+vars.put(&quot;sessionKey&quot;,sessionKey.Token);</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_GetInitialKey" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/GetInitialKey</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Initial Public Key" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">publicKey</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.publicKey</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">publicKeyNotFound</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+            <stringProp name="JSON_PATH">$.stat</stringProp>
+            <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+            <boolProp name="JSONVALIDATION">false</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_GetPreAuthenticationKey" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${postdata}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/GetPreAuthenticationKey</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Encrypt Data To be Sent" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+
+String serverPublicKey = new String(Base64.decodeBase64(vars.get(&quot;publicKey&quot;)));
+
+CryptoRSA crypt = new CryptoRSA();
+NestKeyPair keyPair = crypt.generateNestKeyPair(512);
+
+String clientPublicKey = keyPair.getPemPublicKey();
+String clientPrivateKey = keyPair.getPemPrivateKey();
+
+vars.put(&quot;clientPublicKey&quot;,clientPublicKey);
+vars.put(&quot;clientPrivateKey&quot;,clientPrivateKey);
+
+PublicKey pubKey = crypt.getPublicKeyFromPemData(serverPublicKey);
+String encryptedClientPublicKey = crypt.encrypt(clientPublicKey,pubKey,512);
+
+MessageDigest md = MessageDigest.getInstance(&quot;SHA-256&quot;);
+byte[] digest = md.digest(serverPublicKey.getBytes());
+String hex = Hex.toHexString(digest);
+
+String jData = &quot;jData=&quot;+URLEncoder.encode(encryptedClientPublicKey,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;postdata&quot;,jData);</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract Public Key3" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">pubKey3</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.publicKey3</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">Public Key 3 not found</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+            <stringProp name="JSON_PATH">$.stat</stringProp>
+            <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+            <boolProp name="JSONVALIDATION">false</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Bypass" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${data}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/user/rsa/key</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String privateKey = vars.get(&quot;clientPrivateKey&quot;);
+NestKeyPair keyPair = crypt.generateNestKeyPair(privateKey);
+String pubKey3 = crypt.decrypt(vars.get(&quot;pubKey3&quot;),keyPair.getPrivateKey());
+
+vars.put(&quot;serverPublicKey3&quot;,pubKey3);
+
+MessageDigest md = MessageDigest.getInstance(&quot;SHA-256&quot;);
+byte[] digest = md.digest(pubKey3.getBytes());
+String hex = Hex.toHexString(digest);
+
+vars.put(&quot;pubKey3Hash&quot;,hex);
+
+String sendJsonObject = &quot;{\&quot;user\&quot;:\&quot;&quot;+vars.get(&quot;uid&quot;)+&quot;\&quot;,\&quot;userSessionId\&quot;:\&quot;&quot;+vars.get(&quot;sessionKey&quot;)+&quot;\&quot;,\&quot;i_ActiveTime\&quot;:\&quot;\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey3);
+String encryptedSendObject = crypt.encrypt(sendJsonObject,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">publicKey</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.publicKey</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">publicKey not found</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Decode Token" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+
+String pubKey4 = new String(Base64.decodeBase64(vars.get(&quot;publicKey&quot;)));
+
+vars.put(&quot;serverPublicKey4&quot;,pubKey4);
+
+MessageDigest md = MessageDigest.getInstance(&quot;SHA-256&quot;);
+byte[] digest = md.digest(pubKey4.getBytes());
+String hex = Hex.toHexString(digest);
+
+vars.put(&quot;pubKey4Hash&quot;,hex);</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </LoopController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Orders Data Set" enabled="true">
+            <stringProp name="filename">src/main/conf/Orders.csv</stringProp>
+            <stringProp name="fileEncoding">UTF-8</stringProp>
+            <stringProp name="variableNames">orderToken,orderTradSym,orderAction</stringProp>
+            <boolProp name="ignoreFirstLine">false</boolProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_MWList" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/MWList</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String jsonObject = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,2048);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">values</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.values[0]</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+              <stringProp name="JSONPostProcessor.defaultValues">Default mw not found</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+              <stringProp name="JSON_PATH">$.stat</stringProp>
+              <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+              <boolProp name="JSONVALIDATION">false</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">true</boolProp>
+            </JSONPathAssertion>
+            <hashTree/>
+            <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+              <stringProp name="ConstantTimer.delay">2000</stringProp>
+            </ConstantTimer>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Predef" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/broker/mw/scrips</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String brkname = vars.get(&quot;brkname&quot;)
+
+String placeOrder = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;scripList\&quot;:\&quot;nse_fo|22\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_MarketWatch" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/MarketWatch</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+String names = vars.get(&quot;values&quot;)
+String uid = vars.get(&quot;uid&quot;);
+String jsonObject = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;MWname\&quot;:\&quot;&quot;+names+&quot;\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+              <stringProp name="JSON_PATH">$.stat</stringProp>
+              <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+              <boolProp name="JSONVALIDATION">false</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">true</boolProp>
+            </JSONPathAssertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_GetLotWeight" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/GetLotWeight</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String jsonObject = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+              <stringProp name="JSON_PATH">$.stat</stringProp>
+              <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+              <boolProp name="JSONVALIDATION">false</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">true</boolProp>
+            </JSONPathAssertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_LoadRetentionType" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/LoadRetentionType</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String jsonObject = &quot;{\&quot;Exchange\&quot;:\&quot;NSE\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+              <stringProp name="JSON_PATH">$.stat</stringProp>
+              <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+              <boolProp name="JSONVALIDATION">false</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">true</boolProp>
+            </JSONPathAssertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Orders/ConfirmMsg" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/Orders/ConfirmMsg</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String jsonObject = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;Exchange\&quot;:\&quot;NSE\&quot;,\&quot;TradSym\&quot;:\&quot;ACC-EQ\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_PlaceOrder" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/PlaceOrder</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String token = vars.get(&quot;orderToken&quot;);
+String tradingSymbol = vars.get(&quot;orderTradSym&quot;);
+String orderAction = vars.get(&quot;orderAction&quot;);
+
+String placeOrder = &quot;{\&quot;s_prdt_ali\&quot;:\&quot;BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\&quot;,\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;actid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;Tsym\&quot;:\&quot;&quot;+tradingSymbol+&quot;\&quot;,\&quot;exch\&quot;:\&quot;NSE\&quot;,\&quot;Ttranstype\&quot;:\&quot;&quot;+orderAction+&quot;\&quot;,\&quot;Ret\&quot;:\&quot;DAY\&quot;,\&quot;prctyp\&quot;:\&quot;MKT\&quot;,\&quot;qty\&quot;:\&quot;1\&quot;,\&quot;discqty\&quot;:\&quot;0\&quot;,\&quot;TokenNo\&quot;:\&quot;&quot;+token+&quot;\&quot;,\&quot;MktPro\&quot;:\&quot;3\&quot;,\&quot;Price\&quot;:\&quot;0\&quot;,\&quot;TrigPrice\&quot;:\&quot;0\&quot;,\&quot;Pcode\&quot;:\&quot;NRML\&quot;,\&quot;DateDays\&quot;:\&quot;NA\&quot;,\&quot;AMO\&quot;:\&quot;NO\&quot;,\&quot;PosSquareFlg\&quot;:\&quot;N\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+            <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+              <stringProp name="JSON_PATH">$.stat</stringProp>
+              <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+              <boolProp name="JSONVALIDATION">false</boolProp>
+              <boolProp name="EXPECT_NULL">false</boolProp>
+              <boolProp name="INVERT">false</boolProp>
+              <boolProp name="ISREGEX">true</boolProp>
+            </JSONPathAssertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_GetCOPriceFlag" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/GetCOPriceFlag</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Encrypt Data To be Sent" enabled="false">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String jsonObject = &quot;{\&quot;user\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;Imei\&quot;:\&quot;123456789\&quot;,\&quot;device\&quot;:\&quot;Nexus\&quot;,\&quot;registrationId\&quot;:\&quot;abcdefg123\&quot;}&quot;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(jsonObject,key,2048);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_OrderBook" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/OrderBook</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+
+String placeOrder = &quot;{\&quot;uid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;s_prdt_ali\&quot;: \&quot;BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_TradeBook" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/TradeBook</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+
+String placeOrder = &quot;{\&quot;uid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;s_prdt_ali\&quot;: \&quot;BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Predef" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/broker/mw/scrips</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+String brkname = vars.get(&quot;brkname&quot;)
+
+String placeOrder = &quot;{\&quot;uid\&quot;:\&quot;&quot;+uid+&quot;\&quot;,\&quot;scripList\&quot;:\&quot;nse_fo|22\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Positions" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/PositionBook</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+
+String placeOrder = &quot;{\&quot;uid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;actid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;s_prdt_ali\&quot;: \&quot;BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\&quot;, \&quot;type\&quot;: \&quot;NET\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Limits" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${data}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${appContext}/Limits</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+
+String placeOrder = &quot;{\&quot;uid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;actid\&quot;: \&quot;&quot;+uid+&quot;\&quot;, \&quot;segment\&quot;:\&quot;ALL\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+            </JSR223PreProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PlaceOrder_Logout" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${data}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">${appContext}/Logout</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+            <stringProp name="scriptLanguage">groovy</stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="script">import com.tr.nest.crypto.CryptoRSA;
+import com.tr.nest.crypto.NestKeyPair;
+import org.apache.commons.codec.binary.Base64;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.net.URLEncoder;
+import org.bouncycastle.util.encoders.Hex;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+
+CryptoRSA crypt = new CryptoRSA();
+
+String pubKey4 = vars.get(&quot;serverPublicKey4&quot;);
+String hex = vars.get(&quot;pubKey4Hash&quot;);
+
+String uid = vars.get(&quot;uid&quot;);
+
+String placeOrder = &quot;{\&quot;uid\&quot;: \&quot;&quot;+uid+&quot;\&quot;}&quot;;
+
+PublicKey key = crypt.getPublicKeyFromPemData(pubKey4);
+String encryptedSendObject = crypt.encrypt(placeOrder,key,512);
+
+String data = &quot;jData=&quot;+URLEncoder.encode(encryptedSendObject,&quot;UTF-8&quot;)+&quot;&amp;jKey=&quot;+URLEncoder.encode(hex,&quot;UTF-8&quot;);
+vars.put(&quot;data&quot;,data);</stringProp>
+          </JSR223PreProcessor>
+          <hashTree/>
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+            <stringProp name="ConstantTimer.delay">1000</stringProp>
+          </ConstantTimer>
+          <hashTree/>
+          <JSONPathAssertion guiclass="JSONPathAssertionGui" testclass="JSONPathAssertion" testname="JSON Assertion" enabled="true">
+            <stringProp name="JSON_PATH">$.stat</stringProp>
+            <stringProp name="EXPECTED_VALUE">Ok</stringProp>
+            <boolProp name="JSONVALIDATION">false</boolProp>
+            <boolProp name="EXPECT_NULL">false</boolProp>
+            <boolProp name="INVERT">false</boolProp>
+            <boolProp name="ISREGEX">true</boolProp>
+          </JSONPathAssertion>
+          <hashTree/>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
